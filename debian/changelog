@@ -1,0 +1,198 @@
+libsdl2 (2.0.2+dfsg1-6) unstable; urgency=medium
+
+  * rules: disable activec for ppc64el build (Closes: #770670)
+
+ -- Dominique Dumont <dod@debian.org>  Thu, 27 Nov 2014 18:52:50 +0100
+
+libsdl2 (2.0.2+dfsg1-5) unstable; urgency=medium
+
+  * patch to use default screen from DISPLAY (Closes: #754401)
+  * fix short name of BSD-3-clause
+
+ -- Dominique Dumont <dod@debian.org>  Sat, 18 Oct 2014 19:01:30 +0200
+
+libsdl2 (2.0.2+dfsg1-4) unstable; urgency=medium
+
+  [ Hector Oron ]
+  * d/control: remove libts-dev build depends. (Closes: #751766)
+
+  [ Felix Geyer ]
+  * Move upstream GPG key as an ascii-armored keyring to debian/upstream/.
+
+ -- Felix Geyer <fgeyer@debian.org>  Mon, 16 Jun 2014 21:02:07 +0200
+
+libsdl2 (2.0.2+dfsg1-3) unstable; urgency=medium
+
+  * Actually change Build-Depends libegl1-mesa-dev to be conditionally
+    [!hurd-any].  It was applied to libgl1-mesa-dev by mistake in -2.
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Wed, 19 Mar 2014 20:22:29 +0000
+
+libsdl2 (2.0.2+dfsg1-2) unstable; urgency=medium
+
+  * Conditional dependencies libegl1-mesa-dev [!hurd-any],
+    libgles2-mesa-dev [!hurd-any] and libwayland-dev [linux-any], they do
+    not seem to support these kernels at the moment
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Tue, 18 Mar 2014 20:17:10 +0000
+
+libsdl2 (2.0.2+dfsg1-1) unstable; urgency=low
+
+  * New upstream release
+    - Remove patch applied upstream: fix_ftbfs_kfreebsd.diff
+    - Add support for Wayland, including build-depends for libegl1-mesa-dev,
+      libxkbcommon-dev and libwayland-dev.  Thanks Franz Schrober for the
+      request and the help to enable it.  (Closes: #714482)
+    - Add support for OpenGLES, including build-depends for libgles2-mesa-dev
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Sat, 15 Mar 2014 00:22:48 +0000
+
+libsdl2 (2.0.1+dfsg1-3) unstable; urgency=medium
+
+  * Use "dh_autoreconf" to support new architectures
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Sun, 09 Mar 2014 01:58:11 +0000
+
+libsdl2 (2.0.1+dfsg1-2) unstable; urgency=medium
+
+  * Fix FTBFS on kFreeBSD.
+    - Add fix_ftbfs_kfreebsd.diff to extend a __FreeBSD__ check to
+      __FreeBSD_kernel__.
+
+ -- Felix Geyer <fgeyer@debian.org>  Sun, 05 Jan 2014 13:42:59 +0100
+
+libsdl2 (2.0.1+dfsg1-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #728974)
+    - Remove patch applied upstream:
+      bug-723797-false_positives_in_mouse_wheel_code.patch
+  * Bump Standards-Version to 3.9.5, no changes needed.
+  
+  [ Felix Geyer ]
+  * Import upstream gpg key for uscan to verify the orig tarball.
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Sat, 28 Dec 2013 12:31:19 +0000
+
+libsdl2 (2.0.0+dfsg1-3) unstable; urgency=low
+
+  * Build-Depends on pkg-config
+  * Apply patch accepted upstream to work around a false-positive in the
+    X11 mouse wheel code (Closes: #723797).  Thanks Darren Salt for the
+    report and the fix.
+  * Review and removal of old patches not applied in SDL2, virtually of
+    them applied upstream, or rejected as invalid for good reason, or
+    don't apply any more (code/functionality removed upstream).  I
+    forwarded and documented the remaining patches.
+    - 001_autogen_autotools_fix.diff
+    - 020_libcaca_new_api.diff
+    - 030_pulseaudio_enable.diff
+    - 040_propagate_pic_to_nasm.diff
+    - 050_altivec_detection.diff
+    - 060_disable_ipod.diff
+    - 205_lock_keys.diff
+    - 205_x11_keysym_fix.diff
+    - 206_gcc4_compilation_fix.diff
+    - 209_alsa_priority.diff
+    - 214_missing_mmx_blit.diff
+    - 215_kfreebsd_gnu.diff
+    - 216_page_size.diff
+    - 217_x11_keytounicode.diff
+    - 218_double_free.diff
+    - 218_joystick_memmove.diff
+    - 219_pulseaudio_crackles.diff
+    - 220_std_cld.diff
+    - 221_check_SDL_NOKBD_environment_variable.diff
+    - 222_joystick_crash.diff
+    - 310_fixmouseclicks
+    - 310_segfault_noGLX.diff
+    - 320_activate_xrandr_on_default.diff
+    - 320_disappearingcursor.diff
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Sun, 20 Oct 2013 00:58:48 +0100
+
+libsdl2 (2.0.0+dfsg1-2) unstable; urgency=low
+
+  * Remove external_header_paths.diff, it's not needed anymore and pulls
+    harmful flags into the pkg-config file. Thanks to Thibaut Girka for
+    the report and analysis. (Closes: #720650)
+
+ -- Felix Geyer <fgeyer@debian.org>  Fri, 30 Aug 2013 20:20:47 +0200
+
+libsdl2 (2.0.0+dfsg1-1) unstable; urgency=low
+
+  * New upstream release
+  * Filter upstream tarball from binaries and unneeded cruft
+    - Remove from debian/copyright files that are now filtered out when creating
+      the orig.tar
+  * Add build-dependency on libdbus-1-dev, to use D-Bus
+  * Switch to @debian.org address
+  * Bring the man page of sdl-config up to date
+
+ -- Manuel A. Fernandez Montecelo <mafm@debian.org>  Mon, 12 Aug 2013 20:45:31 +0100
+
+libsdl2 (2.0.0~rc1-1) unstable; urgency=low
+
+  * New upstream release candidate.
+  * Filter debian/* when importing new upstream releases.
+  * Bump SHLIBVER to 2.0.0~rc1.
+  * Update debian/docs.
+  * Bump Standards-Version to 3.9.4, no changes needed.
+  * Disable directfb backend for now as it's broken and upstream
+    disables it by default.
+    - Drop the udeb package.
+  * Drop some unused dependencies and confflags.
+
+ -- Felix Geyer <fgeyer@debian.org>  Sun, 02 Jun 2013 18:31:42 +0200
+
+libsdl2 (2.0.0~20130103-1) unstable; urgency=low
+
+  [ Manuel A. Fernandez Montecelo ]
+  * debian/control:
+    - Updating maintainers/permissions:
+      - Add myself and Felix Geyer
+    - Update Build-Depends:
+      - Remove a few obsolete items
+      - Add items added lately to libsdl1.2, such as libts (touch screen)
+        support
+    - Add "libsdl2-dbg", analog to libsdl1.2-dbg
+    - Change "XC-Package-Type: udeb" to "Package-Type"
+  * debian/compat: set level 9
+  * debian/source/format: Set to "3.0 (quilt)"
+    - Remove README.source, not needed with new format
+  * debian/sdl2-config.1: Fix typo, "progams"->"programs"
+  * debian/libsdl2-dev.install:
+    - Remove "usr/lib/*/*.la", discouraged
+    - Add man pages: "usr/share/man/man3/*"
+  * debian/libsdl2-dev.manpages: add file to install local "sdl2-config.1"
+  * debian/sources: Removed, possible obsolete file from long ago?
+  * debian/copyright:
+    - Upstream updated to zlib/libpng
+    - Copyright-file format conversion to 1.0
+    - Complete revamp and detailed research about copyright and licenses used,
+      it's very messy but hopefully complete
+
+  [ Felix Geyer ]
+  * Simplify debian/rules by using dh(1).
+
+ -- Manuel A. Fernandez Montecelo <manuel.montezelo@gmail.com>  Sun, 27 Jan 2013 16:40:49 +0100
+
+libsdl2 (2.0~20120220c-1) experimental; urgency=low
+
+  * Upstream version was renamed to 2.0 (Closes: #669367).
+  * New upstream snapshot (Closes: #671506).
+  * This package no longer conflicts with libsdl-1.2.
+  * debian/rules: add multiarch support (Closes: #669364).
+
+  * debian/patches/fix_joystick_misc_axes.diff: fix a joystick remapping
+    bug causing some axes to malfunction.
+  * debian/patches/external_header_paths.diff: provide additional CFLAGS
+    so that headers such as SDL_syswm.h can be included (Closes: #669363).
+
+ -- Sam Hocevar <sho@debian.org>  Thu, 17 May 2012 19:03:59 +0200
+
+libsdl-1.3 (1.3.0~20111204-1) experimental; urgency=low
+
+  * Initial upload from upstream snapshot.
+
+ -- Sam Hocevar <sho@debian.org>  Sun, 04 Dec 2011 14:35:05 +0100
+

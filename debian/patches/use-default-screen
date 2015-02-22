@@ -1,0 +1,48 @@
+Description: Use default screen
+ Respect default screen from DISPLAY variable, using standard X11 function calls.
+Bug: https://bugzilla.libsdl.org/show_bug.cgi?id=2192
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=%23754401
+Author: Steaphan Greene
+Origin: upstream
+From: https://hg.libsdl.org/SDL/rev/3d2c0f659ad3
+Reviewed-by: dod
+--- a/src/video/x11/SDL_x11modes.c	Wed Oct 15 15:50:35 2014 -0400
++++ b/src/video/x11/SDL_x11modes.c	Wed Oct 15 18:33:43 2014 -0300
+@@ -375,7 +375,7 @@
+ X11_InitModes(_THIS)
+ {
+     SDL_VideoData *data = (SDL_VideoData *) _this->driverdata;
+-    int screen, screencount;
++    int snum, screen, screencount;
+ #if SDL_VIDEO_DRIVER_X11_XINERAMA
+     int xinerama_major, xinerama_minor;
+     int use_xinerama = 0;
+@@ -423,7 +423,7 @@
+     }
+ #endif /* SDL_VIDEO_DRIVER_X11_XVIDMODE */
+ 
+-    for (screen = 0; screen < screencount; ++screen) {
++    for (snum = 0; snum < screencount; ++snum) {
+         XVisualInfo vinfo;
+         SDL_VideoDisplay display;
+         SDL_DisplayData *displaydata;
+@@ -433,6 +433,15 @@
+         char display_name[128];
+         int i, n;
+ 
++        /* Re-order screens to always put default screen first */
++        if (snum == 0) {
++            screen = DefaultScreen(data->display);
++        } else if (snum == DefaultScreen(data->display)) {
++            screen = 0;
++        } else {
++            screen = snum;
++        }
++
+ #if SDL_VIDEO_DRIVER_X11_XINERAMA
+         if (xinerama) {
+             if (get_visualinfo(data->display, 0, &vinfo) < 0) {
+
+
+
+
