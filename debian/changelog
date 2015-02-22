@@ -1,3 +1,9 @@
+libsdl2 (2.0.2+dfsg1-7) unstable; urgency=medium
+
+  * add support for Mali-fbdev video driver
+
+ -- memeka <mihailescu2m@gmail.com>  Sun, 22 Feb 2015 16:34:40 +1030
+
 libsdl2 (2.0.2+dfsg1-6) unstable; urgency=medium
 
   * rules: disable activec for ppc64el build (Closes: #770670)

@@ -34,8 +34,8 @@
 #define DEFAULT_OGL_ES_PVR "/opt/vc/lib/libGLES_CM.so"
 #define DEFAULT_OGL_ES "/opt/vc/lib/libGLESv1_CM.so"
 
-#elif SDL_VIDEO_DRIVER_ANDROID
-/* Android */
+#elif SDL_VIDEO_DRIVER_ANDROID || SDL_VIDEO_DRIVER_MALI
+/* Android and Mali-fbdev */
 #define DEFAULT_EGL "libEGL.so"
 #define DEFAULT_OGL_ES2 "libGLESv2.so"
 #define DEFAULT_OGL_ES_PVR "libGLES_CM.so"
@@ -303,7 +303,7 @@ SDL_EGL_ChooseConfig(_THIS)
         attribs[i++] = EGL_OPENGL_BIT;
         _this->egl_data->eglBindAPI(EGL_OPENGL_API);
     }
-    
+
     attribs[i++] = EGL_NONE;
    
     if (_this->egl_data->eglChooseConfig(_this->egl_data->egl_display,
