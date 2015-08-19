@@ -134,17 +134,16 @@ MALI_VideoInit(_THIS)
         MALI_VideoQuit(_this);
         return SDL_SetError("mali-fbdev: Could not get framebuffer information");
     }
-
-
-
-    vinfo.yres_virtual = vinfo.yres * 2;
-//    vinfo.activate = FB_ACTIVATE_NOW;
+    /* Enable triple buffering */
+    /*
+    vinfo.yres_virtual = vinfo.yres * 3;
     if (ioctl(fd, FBIOPUT_VSCREENINFO, vinfo) == -1) {
-	printf("*** ERROR SETTING VSCREEN\n");
-//        MALI_VideoQuit(_this);
-//        return SDL_SetError("mali-fbdev: Could not get framebuffer information");
+	printf("mali-fbdev: Error setting VSCREENINFO\n");
     }
+    */
     close(fd);
+    system("setterm -cursor off");
+
     data->native_display.width = vinfo.xres;
     data->native_display.height = vinfo.yres;
 
@@ -178,6 +177,7 @@ MALI_VideoInit(_THIS)
 void
 MALI_VideoQuit(_THIS)
 {
+    /* Clear the framebuffer and ser cursor on again */
     int fd = open("/dev/tty", O_RDWR);
     ioctl(fd, VT_ACTIVATE, 5);
     ioctl(fd, VT_ACTIVATE, 1);
